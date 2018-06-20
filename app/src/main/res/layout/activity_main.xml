@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.exercicio.cardsbattle.MainActivity">
+
+    <ImageView
+        android:id="@+id/background_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_1"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/pan"
+        android:layout_width="102dp"
+        android:layout_height="141dp"
+        android:src="@drawable/caldeirao"
+        android:textColor="@android:color/white"
+        android:layout_centerInParent="true" />
+
+    <ImageView
+        android:id="@+id/card_3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginTop="2dp" />
+
+    <ImageView
+        android:id="@+id/card_2"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/card_3"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginTop="2dp"/>
+
+    <ImageView
+        android:id="@+id/card_1"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/card_2"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginTop="2dp" />
+
+
+    <ImageView
+        android:id="@+id/card_4"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/card_3"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginTop="2dp" />
+
+    <ImageView
+        android:id="@+id/card_5"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/card_4"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginTop="2dp" />
+
+    <ImageView
+        android:id="@+id/card_6"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/card_7"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginBottom="2dp" />
+
+    <ImageView
+        android:id="@+id/card_7"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/card_8"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginBottom="2dp" />
+
+    <ImageView
+        android:id="@+id/card_8"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginBottom="2dp"/>
+
+    <ImageView
+        android:id="@+id/card_9"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/card_8"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginBottom="2dp" />
+
+    <ImageView
+        android:id="@+id/card_10"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/card_9"
+        android:layout_width="62dp"
+        android:layout_height="100dp"
+        android:padding="3dp"
+        android:layout_marginBottom="2dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/witch1"
+        android:layout_height="170dp"
+        android:layout_width="110dp"
+        android:src="@drawable/alice_normal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/witch2"
+        android:layout_height="170dp"
+        android:layout_width="110dp"
+        android:src="@drawable/kalista_normal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/decks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/card_1" />
+
+    <Button
+        android:id="@+id/menu_button"
+        android:background="@drawable/config"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:id="@+id/witch1_life_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/witch1"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/witch1_life"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/heart" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch1_defense_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical"
+        android:layout_toLeftOf="@id/witch1"
+        android:layout_below="@id/witch1_life_container">
+
+        <TextView
+            android:id="@+id/witch1_defense"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_escudo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch1_attack_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@id/witch1"
+        android:layout_below="@id/witch1_defense_container">
+
+        <TextView
+            android:id="@+id/witch1_attack"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/sword" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch1_poison_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:visibility="invisible"
+        android:layout_toLeftOf="@id/witch1"
+        android:layout_below="@id/witch1_attack_container" >
+
+        <TextView
+            android:id="@+id/witch1_poison"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_veneno" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch1_freeze_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:visibility="invisible"
+        android:layout_toLeftOf="@id/witch1"
+        android:layout_below="@id/witch1_poison_container" >
+
+        <TextView
+            android:id="@+id/witch1_freeze"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_gelo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch2_life_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/witch2" >
+
+        <TextView
+            android:id="@+id/witch2_life"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/heart" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch2_defense_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_above="@id/witch2_life_container"
+        android:layout_toLeftOf="@id/witch2" >
+
+        <TextView
+            android:id="@+id/witch2_defense"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_escudo" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/witch2_attack_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_above="@id/witch2_defense_container"
+        android:layout_toLeftOf="@id/witch2" >
+
+        <TextView
+            android:id="@+id/witch2_attack"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/sword" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/witch2_poison_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:visibility="invisible"
+        android:layout_above="@id/witch2_attack_container"
+        android:layout_toLeftOf="@id/witch2" >
+
+        <TextView
+            android:id="@+id/witch2_poison"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_veneno" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/witch2_freeze_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@id/witch2"
+        android:visibility="invisible"
+        android:layout_above="@id/witch2_poison_container" >
+
+        <TextView
+            android:id="@+id/witch2_freeze"
+            android:textColor="@android:color/white"
+            android:textSize="14dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0" />
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/item_gelo" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/witch1_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/witch1"
+        android:layout_toLeftOf="@id/witch1"
+        android:background="@drawable/bg_speach"
+        android:textColor="@android:color/black"
+        android:visibility="invisible"
+        android:padding="8dp"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/witch2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/witch2"
+        android:layout_toLeftOf="@id/witch2"
+        android:background="@drawable/bg_speach_bottom"
+        android:textColor="@android:color/black"
+        android:visibility="invisible"
+        android:padding="8dp"
+        android:textSize="12dp" />
+
+</RelativeLayout>

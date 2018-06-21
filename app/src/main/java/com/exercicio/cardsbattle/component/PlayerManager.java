@@ -10,6 +10,9 @@ import com.exercicio.cardsbattle.MainActivity;
 import com.exercicio.cardsbattle.R;
 import com.exercicio.cardsbattle.model.Skill;
 
+/**
+ * Classe que gerencia as animações de um jogador.
+ */
 public class PlayerManager {
 
     private boolean isCPU;
@@ -30,6 +33,9 @@ public class PlayerManager {
 
     private int lastParalyzeId;
 
+    /**
+     * Construtor que recebe as views relativas ao jogador.
+     */
     public PlayerManager(final ImageView avatar,
                          final TextView lifeView,
                          final TextView defenseView,
@@ -50,18 +56,30 @@ public class PlayerManager {
         this.lastParalyzeId = isCPU ? R.drawable.alice_congelada : R.drawable.kalista_congelada;
     }
 
+    /**
+     * Anima a aparência de ataque do jogador.
+     */
     public void setPlayerAttackingState() {
         this.avatar.setImageResource(isCPU ? R.drawable.alice_ataque : R.drawable.kalista_ataque);
     }
 
+    /**
+     * Anima a aparência padrão do jogador.
+     */
     public void setPlayerNormalState() {
         this.avatar.setImageResource(isCPU ? R.drawable.alice_normal : R.drawable.kalista_normal);
     }
 
+    /**
+     * Anima a aparencia de dor do jogador.
+     */
     public void setPlayerHurtState(Skill skill) {
         this.avatar.setImageResource(isCPU ? skill.getCPUHurtImage() : skill.getPlayerHurtImage());
     }
 
+    /**
+     * Anima um novo item de defesa ou ataque no jogador.
+     */
     public void addState(Skill skill, int viewId, final RelativeLayout parent) {
         int imageRes = isCPU ? skill.getCPUHurtImage() : skill.getPlayerHurtImage();
         if(imageRes != 0) {
@@ -74,22 +92,37 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * Anima os pontos de ataque do jogador.
+     */
     public void animateAttackStatus(Integer currentValue, Integer newValue) {
         animateViewValue(attackView, currentValue, newValue);
     }
 
+    /**
+     * Anima os pontos de defesa do jogador.
+     */
     public void animateDefenseStatus(Integer currentValue, Integer newValue) {
         animateViewValue(defenseView, currentValue, newValue);
     }
 
+    /**
+     * Anima os pontos de veneno do jogador.
+     */
     public void animatePoisonStatus(Integer currentValue, Integer newValue) {
         animateViewValue(poisonView, currentValue, newValue);
     }
 
+    /**
+     * Anima os pontos de vida do jogador.
+     */
     public void animateLifeStatus(Integer currentValue, Integer newValue) {
         animateViewValue(lifeView, currentValue, newValue);
     }
 
+    /**
+     * Anima uma view com pontos. (Função usada pelas outras funções de ataque, defesa, vida, veneno, paralyze).
+     */
     private void animateViewValue(TextView view, Integer currentValue, Integer newValue) {
         if(!currentValue.equals(newValue)) {
             view.setText(currentValue.toString());
@@ -102,26 +135,42 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * Anima os pontos da ultima carta de paralyze usada pelo jogador.
+     */
     public void animateParalyzeStatus(Skill skill, int currentParalyze, int paralyze) {
         this.lastParalyzeId = isCPU ? skill.getCPUHurtImage() : skill.getPlayerHurtImage();
         this.animateParalyzeStatus(currentParalyze, paralyze);
     }
 
+    /**
+     * Anima os pontos de paralyze do jogador.
+     */
     public void animateParalyzeStatus(int currentParalyze, int paralyze) {
         avatar.setImageResource(lastParalyzeId);
         animateViewValue(paralyzeView, currentParalyze, paralyze);
     }
 
+    /**
+     * Anima o veneno atacando o jogador.
+     */
     public void animatePoison() {
         avatar.setImageResource(isCPU ? R.drawable.alice_envenenada : R.drawable.kalista_envenenada);
     }
 
+    /**
+     * Exibe o comentário do jogador.
+     */
     public void addComment(String text) {
         commentView.setText(text);
         commentView.setVisibility(View.VISIBLE);
         commentView.postDelayed(() -> commentView.setVisibility(View.INVISIBLE), 2000);
     }
 
+    /**
+     * Reseta e anima os pontos de status do jogador.
+     * @param maxHealth
+     */
     public void initValues(int maxHealth) {
         this.lifeView.setText(maxHealth + "");
         this.defenseView.setText(0+ "");

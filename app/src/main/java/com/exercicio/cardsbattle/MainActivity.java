@@ -32,8 +32,12 @@ import java.util.Random;
 
 import pl.droidsonroids.gif.GifImageView;
 
+/**
+ * Clase que representa a tela e gerencia a partida.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CardSelector {
 
+    /* Vida máxima da partida */
     public static final int MAX_HEALTH = 150;
     private Player CPU; //Jogador cpu
     private Player PLAYER; //Jogador principal
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final Integer BACKGROUND_ANIMATION_TIME = 2000; //2 segundos
 
+    /**
+     * Função chamada quando a tela é criada.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.initMatch();
     }
 
+    /**
+     * Anima o background da tela.
+     */
     private void animateBackground() {
         final ImageView backgroundOne = findViewById(R.id.background_one);
 
@@ -82,40 +92,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    private void animateBackground() {
-//        final ImageView backgroundOne = findViewById(R.id.background_one);
-//        final ImageView backgroundTwo = findViewById(R.id.background_two);
-//
-//        final ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 1.0f);
-//        animator.setRepeatCount(ValueAnimator.INFINITE);
-//        animator.setInterpolator(new LinearInterpolator());
-//        animator.setDuration(20000L);
-//        animator.addUpdateListener(animation -> {
-//            final float progress = (float) animation.getAnimatedValue();
-//            final float width = backgroundOne.getWidth();
-//            final float translationX = width * progress;
-//            backgroundOne.setTranslationX(translationX);
-//            backgroundTwo.setTranslationX(translationX - width);
-//        });
-//        animator.start();
-//    }
-
+    /**
+     * Verifica se é a vez da CPU
+     */
     private boolean isCPUTime() {
         return turn == CPU;
     }
 
+    /**
+     * Inicia a partida.
+     */
     private void initMatch() {
         this.initPlayers();
         this.initPCCards();
         this.initUserCards();
     }
 
+    /**
+     * Inicia a panela e a skill selecionada.
+     */
     private void initElements() {
         this.selectedSkill = this.findViewById(R.id.decks);
         this.pan = this.findViewById(R.id.pan);
         pan.setOnClickListener(this);
     }
 
+    /**
+     * Inicia as cartas do pc.
+     */
     private void initPCCards() {
 
         final List<CardManager> pcCards = new ArrayList<>();
@@ -138,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(() -> CPU.getPlayerManager().initValues(MAX_HEALTH), 300);
     }
 
+    /**
+     * Inicia as cartas do usuário.
+     */
     private void initUserCards() {
 
         final List<CardManager> userCards = new ArrayList<>();
@@ -161,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(() -> PLAYER.getPlayerManager().initValues(this.MAX_HEALTH), 300);
     }
 
+    /**
+     * Inicia um gerenciador de carta, dada a carta e o jogador.
+     */
     private void initCardManager(List<CardManager> list, int id, int position, Player player) {
         final CardManager cardManager = new CardManager(
                 this.findViewById(id),
@@ -171,12 +181,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.add(cardManager);
     }
 
+    /**
+     * Inicia os jogadores e dá a vez ao jogador iniciar.
+     */
     private void initPlayers() {
         this.CPU = new Player(1, MAX_HEALTH);
         this.PLAYER = new Player(2, MAX_HEALTH);
         this.turn = this.PLAYER;
     }
 
+    /**
+     * Alterna a vez do jogador.
+     */
     private void switchTurn() {
         turn = (isCPUTime()) ? PLAYER : CPU;
         if(isCPUTime()) {
@@ -184,6 +200,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Executa quando a panela ou o botão de menu é clicado.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.pan) {
@@ -196,6 +215,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Aplica o efeito quando o jogador estiver com o efeito.
+     */
     private void decreaseParalyzeState() {
         this.selectedSkill.setImageResource(0);
         int currentParalyze = this.turn.getParalyze();
@@ -207,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Reduz a vida do jogador quando estiver com veneno.
+     */
     private void poisonLifeReduce() {
         int currentLife = turn.getLife();
         turn.getPlayerManager().animatePoison();
@@ -214,18 +239,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         turn.getPlayerManager().animateLifeStatus(currentLife, turn.getLife());
     }
 
+    /**
+     * Adiciona um comentário para o jogador que ataca
+     */
     private void addTargetComment(Player target, Texts texts) {
         if(texts.apanha != null && !texts.apanha.isEmpty()) {
             target.getPlayerManager().addComment(texts.apanha.get(new Random().nextInt(texts.apanha.size())));
         }
     }
 
+    /**
+     * Adiciona um comentário para o jogador que apanha
+     */
     private void addAttackerComment(Texts texts) {
         if(texts.bate != null && !texts.bate.isEmpty()) {
             this.turn.getPlayerManager().addComment(texts.bate.get(new Random().nextInt(texts.bate.size())));
         }
     }
 
+    /**
+     * Usa uma carta.
+     */
     private void useCard() {
         this.pan.setClickable(false);
         if(turn.getParalyze() > 0) {
@@ -237,15 +271,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Volta os jogadores ao estado normal.
+     */
     private void setPlayerNormal() {
         this.CPU.getPlayerManager().setPlayerNormalState();
         this.PLAYER.getPlayerManager().setPlayerNormalState();
     }
 
+    /**
+     * Cria um id pra uma view que representa um item.
+     */
     private int createViewId(Player player, int skillId) {
         return player.getId() * 100 + skillId;
     }
 
+    /**
+     * Adiciona um item de uma carta para o jogador.
+     */
     private void addSkillState(Skill skill) {
         int previousAttack = turn.getAttack();
         int previousDefense = turn.getDefense();
@@ -261,6 +304,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         turn.getPlayerManager().addState(skill, createViewId(turn, skill.getId()), screen);
     }
 
+    /**
+     * Ataca jogador com uma carta.
+     */
     private void attackPlayer(final Skill skill) {
         final Player target = isCPUTime() ? PLAYER : CPU;
         target.getPlayerManager().setPlayerHurtState(skill);
@@ -310,6 +356,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Remove um item do jogador.
+     */
     private void removeStateView(Player target, Integer state) {
         int stateId = this.createViewId(target, state);
         final View view = findViewById(stateId);
@@ -318,6 +367,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Aplica o efeito de uma carta.
+     */
     private void setSkillEffect(Skill skill) {
         this.pan.setImageResource(R.drawable.caldeirao);
         int delay = 800;
@@ -342,6 +394,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(this::afterUseCard, delay);
     }
 
+    /**
+     * Ações após usar uma carta.
+     */
     private void afterUseCard() {
         if(turn.getPoison() > 0) {
             //addTargetComment(turn, Texts.VENENO);
@@ -352,6 +407,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Retorna a partida pra estado normal e troca a vez. Caso um dos jogadores nao tenha mais vida,
+     * finaliza a partida.
+     */
     private void backToNormalState() {
         this.setPlayerNormal();
         if(PLAYER.getLife() <= 0 || CPU.getLife() <= 0) {
@@ -363,6 +422,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Anima a skill selecionada.
+     */
     private void animateSelectedSkill() {
         float translationX = this.selectedSkill.getTranslationX();
         float translationY = this.selectedSkill.getTranslationY();
@@ -386,12 +448,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }).setDuration(1000).start();
     }
 
+    /**
+     * Remove todas as seleções de cartas do jogo.
+     */
     private void resetSkills(Integer position) {
         this.PLAYER.getCardManagers().forEach(CardManager::unselectCard);
         this.CPU.getCardManagers().forEach(CardManager::unselectCard);
         turn.setSelectedSkill(position);
     }
 
+    /**
+     * Executa quando uma carta é selecionada.
+     * @param position
+     * @param userCard
+     * @return
+     */
     @Override
     public boolean onCardSelect(final int position, final boolean userCard) {
         if((isCPUTime() && !userCard) || !isCPUTime() && userCard) {
@@ -404,6 +475,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Sorteia uma carta para um jogador.
+     * @param position
+     * @param player
+     * @param cardManager
+     */
     private void sortCard(final int position, final Player player, final CardManager cardManager) {
         final List<Skill> deckSkills = BaseSkill.getAllSkills();
         final int posSkill = new Random().nextInt(deckSkills.size());
@@ -434,7 +511,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         },400);
     }
 
-    // ação da CPU
+    /**
+     * Anima ação de selecão e uso de carta da CPU.
+     */
     private void cpuAction() {
         handler.postDelayed(() -> {
             this.cpuSelectCard();
@@ -443,6 +522,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }, 2000);
     }
 
+    /**
+     * Seleciona uma carta para a CPU.
+     */
     private void cpuSelectCard() {
         int skillPos = 0;
         Skill skill = null;
@@ -488,6 +570,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.CPU.getCardManagers().get(skillPos).fireClick();
     }
 
+    /**
+     * Chama o dialog de menu.
+     */
     private void showMenuDialog() {
         final FragmentManager fm = getSupportFragmentManager();
         final MenuDialog menuDialog = MenuDialog.createMenuDialog(this);
@@ -495,10 +580,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Executa para fechar a aplicação
+     */
     public void setGameExit() {
         this.finishAndRemoveTask();
     }
 
+    /**
+     * Reinicia a partida e volta os status dos jogadores ao estado inicial.
+     */
     public void setGameRestart() {
         findViewById(R.id.witch1_poison_container).setVisibility(View.INVISIBLE);
         findViewById(R.id.witch2_poison_container).setVisibility(View.INVISIBLE);
@@ -511,6 +602,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.initMatch();
     }
 
+    /**
+     * Executa ao finalizar o jogo e informa quem venceu.
+     */
     private void fimDoJogo() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(CPU.getLife() <= 0 ? "Parabéns! Você venceu!" : "Que pena. Você perdeu!")

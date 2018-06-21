@@ -1,13 +1,15 @@
 package com.exercicio.cardsbattle.model.skills;
 
 import com.exercicio.cardsbattle.R;
-import com.exercicio.cardsbattle.model.Player;
 import com.exercicio.cardsbattle.model.Skill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Enumerador com todas as cartas do jogo.
+ */
 public enum BaseSkill implements Skill {
 
     CENOURADA       ( 1, "Cenourada", Texts.ATAQUE, SkillModel.ACTION, SkillRate.WEAK,
@@ -127,6 +129,9 @@ public enum BaseSkill implements Skill {
 
     private List<SkillType> types;
 
+    /**
+     * Construtor das cartas de ataque
+     */
     BaseSkill(Integer id, String name, Texts texts, SkillModel model, SkillRate rate,
               int image, int imageItem, int imageAlice, int imageKalista, int zIndex,
               int heal, int attack,
@@ -137,6 +142,9 @@ public enum BaseSkill implements Skill {
             false, 0, false, false);
     }
 
+    /**
+     * Construtor das cartas de feitiço
+     */
     BaseSkill(Integer id, String name, Texts texts, SkillModel model, SkillRate rate,
               int image, int imageItem, int imageAlice, int imageKalista, int zIndex,
               boolean curePoison, int paralyze, boolean spy,  boolean dispel) {
@@ -146,6 +154,9 @@ public enum BaseSkill implements Skill {
             curePoison, paralyze, spy, dispel);
     }
 
+    /**
+     * Construtor padrão
+     */
     BaseSkill(Integer id, String name, Texts texts, SkillModel model, SkillRate rate,
               int image, int imageItem, int imageCPU, int imagePlayer, int zIndex,
               int heal, int attack, int defense, int damage, int poison,
@@ -191,9 +202,7 @@ public enum BaseSkill implements Skill {
         if(this.dispel) types.add(SkillType.DISPEL);
     }
 
-    @Override
-    public void use(Player player, Player target) {
-    }
+    // IMPLEMENTAÇÕES DA INTERFACE SKILL
 
     @Override
     public int getId() {

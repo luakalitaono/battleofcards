@@ -9,23 +9,33 @@ import android.view.ViewGroup;
 
 import com.exercicio.cardsbattle.R;
 
+/**
+ * Menu de configurações em formato Dialog.
+ */
 public class MenuDialog extends DialogFragment implements View.OnClickListener {
 
     private CardSelector selector;
 
     public MenuDialog() { }
 
+    /** Função estática que cria um menu*/
     public static MenuDialog createMenuDialog(CardSelector selector) {
         final MenuDialog dialog = new MenuDialog();
         dialog.selector = selector;
         return dialog;
     }
 
+    /**
+     * Função que executa quando a view vai ser criada.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.menu_dialog, container);
     }
 
+    /**
+     * Função que executa quando a view acabou de ser criada.
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,6 +48,9 @@ public class MenuDialog extends DialogFragment implements View.OnClickListener {
         exitView.setOnClickListener(this);
     }
 
+    /**
+     * Função que executa quando um item do menu é selecionado.
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.restart) {

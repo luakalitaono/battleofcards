@@ -10,8 +10,14 @@ import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
+/**
+ * Tela inicial com o botão de jogar.
+ */
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Executa ao iniciar a tela.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +30,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_play).setOnClickListener(this);
     }
 
-
+    /**
+     * Anima o background da tela.
+     */
     private void animateBackground() {
         final ImageView backgroundOne = findViewById(R.id.background_one);
         if(backgroundOne != null) {
@@ -40,6 +48,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Executa quando o botão de jogar é clicado.
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_play) {

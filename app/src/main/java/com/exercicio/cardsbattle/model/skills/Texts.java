@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Enumerador que possui todos os comentários de quem bate e de quem apanha após o uso de uma carta.
+ */
 public enum Texts {
 
     ATAQUE (Arrays.asList( "Bazara Metrium Zentus!", "Avada Kedavra!",

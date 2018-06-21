@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import com.exercicio.cardsbattle.R;
 import com.exercicio.cardsbattle.model.Skill;
 
+/**
+ * Classe que gerencia efeitos visuais na carta
+ */
 public class CardManager implements View.OnClickListener {
 
     private ImageView card;
@@ -17,6 +20,9 @@ public class CardManager implements View.OnClickListener {
 
     private CardSelector cardSelector;
 
+    /**
+     * Construtor
+     */
     public CardManager(final ImageView card, final int position, final boolean userCard){
         this.card = card;
         this.position = position;
@@ -24,10 +30,17 @@ public class CardManager implements View.OnClickListener {
         card.setOnClickListener(this);
     }
 
+    /**
+     * Retorna a view que anima a carta
+     * @return
+     */
     public ImageView getView() {
         return this.card;
     }
 
+    /**
+     * Altera a view com a imagem da nova carta, ou esconde caso seja a CPU
+     */
     public void updateSkill(Skill skill) {
         this.skill = skill;
         if(userCard) {
@@ -39,14 +52,24 @@ public class CardManager implements View.OnClickListener {
         }
     }
 
+    /**
+     * Configura o Listener que vai ouvir quando a carta for selecionada
+     * @param cardSelector
+     */
     public void setCardClickListener(CardSelector cardSelector) {
         this.cardSelector = cardSelector;
     }
 
+    /**
+     * Função que clica na carta programaticamente (usada pra CPU).
+     */
     public void fireClick() {
         this.card.performClick();
     }
 
+    /**
+     * Função que executa quando uma carta é clicada.
+     */
     @Override
     public void onClick(final View view) {
         boolean result = cardSelector.onCardSelect(position, userCard);
@@ -55,14 +78,23 @@ public class CardManager implements View.OnClickListener {
         }
     }
 
+    /**
+     * aplica uma borda dourada na carta ao ser selecionada.
+     */
     public void selectCard() {
         card.setBackgroundColor(Color.rgb(254, 200, 0));
     }
 
+    /**
+     * remove a borda dourada da carta quando a carta deixa de ser selecionada.
+     */
     public void unselectCard() {
         card.setBackgroundResource(0);
     }
 
+    /**
+     * Função que anima o efeito da carta VISÃO (ver as cartas do adiversário).
+     */
     public void animateSpyStatus() {
         if(!shown) {
             shown = true;
@@ -81,21 +113,4 @@ public class CardManager implements View.OnClickListener {
                     .start();
         }
     }
-
-//
-//    @Override
-//    public boolean onTouch(View view, MotionEvent event) {
-//        switch (event.getActionMasked()) {
-//            case MotionEvent.ACTION_DOWN:
-//                xCoOrdinate = view.getX() - event.getRawX();
-//                yCoOrdinate = view.getY() - event.getRawY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                view.animate().x(event.getRawX() + xCoOrdinate).y(event.getRawY() + yCoOrdinate).setDuration(0).start();
-//                break;
-//            default:
-//                return false;
-//        }
-//        return true;
-//    }
 }

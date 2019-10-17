@@ -6,9 +6,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.exercicio.cardsbattle.MainActivity;
 import com.exercicio.cardsbattle.R;
+import com.exercicio.cardsbattle.model.Player;
 import com.exercicio.cardsbattle.model.Skill;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Classe que gerencia as animações de um jogador.
@@ -33,6 +38,8 @@ public class PlayerManager {
 
     private int lastParalyzeId;
 
+    private Set<Integer> viewIds;
+
     /**
      * Construtor que recebe as views relativas ao jogador.
      */
@@ -54,6 +61,7 @@ public class PlayerManager {
 
         this.isCPU = isCPU;
         this.lastParalyzeId = isCPU ? R.drawable.alice_congelada : R.drawable.kalista_congelada;
+        viewIds = new HashSet<>();
     }
 
     /**
@@ -87,6 +95,7 @@ public class PlayerManager {
             final ImageView newState = new ImageView(parent.getContext());
             newState.setImageResource(imageRes);
             newState.setId(viewId);
+            viewIds.add(viewId);
             parent.addView(newState, layoutParams);
             newState.setZ(skill.getZIndex());
         }
@@ -124,7 +133,7 @@ public class PlayerManager {
      * Anima uma view com pontos. (Função usada pelas outras funções de ataque, defesa, vida, veneno, paralyze).
      */
     private void animateViewValue(TextView view, Integer currentValue, Integer newValue) {
-        if(!currentValue.equals(newValue)) {
+        if (!currentValue.equals(newValue)) {
             view.setText(currentValue.toString());
             final int value = Math.abs(currentValue - newValue);
             final int multiplier = value > 20 ? 40 : 60;

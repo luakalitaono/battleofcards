@@ -345,15 +345,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(skill.isDispel()) {
-            int previousAttack = target.getAttack();
-            int previousDefense = target.getDefense();
-            target.setAttack(0);
-            target.setDefense(0);
-            target.getPlayerManager().animateAttackStatus(previousAttack, target.getAttack());
-            target.getPlayerManager().animateDefenseStatus(previousDefense, target.getDefense());
-            target.getActiveStates().forEach(state -> this.removeStateView(target, state));
-            target.getActiveStates().clear();
+            resetPlayerState(target);
         }
+    }
+
+    private void resetPlayerState(Player target) {
+        int previousAttack = target.getAttack();
+        int previousDefense = target.getDefense();
+        target.setAttack(0);
+        target.setDefense(0);
+        target.getPlayerManager().animateAttackStatus(previousAttack, target.getAttack());
+        target.getPlayerManager().animateDefenseStatus(previousDefense, target.getDefense());
+        target.getActiveStates().forEach(state -> this.removeStateView(target, state));
+        target.getActiveStates().clear();
     }
 
     /**
@@ -599,6 +603,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.witch2_freeze_container).setVisibility(View.INVISIBLE);
         findViewById(R.id.witch1_text).setVisibility(View.INVISIBLE);
         findViewById(R.id.witch1_text).setVisibility(View.INVISIBLE);
+        this.resetPlayerState(this.PLAYER);
+        this.resetPlayerState(this.CPU);
+        this.removeStateView(this.PLAYER, this.createViewId(this.PLAYER, BaseSkill.VENENO.getId()));
+        this.removeStateView(this.CPU, this.createViewId(this.CPU, BaseSkill.VENENO.getId()));
         this.initMatch();
     }
 

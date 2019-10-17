@@ -3,6 +3,7 @@ package com.exercicio.cardsbattle.model;
 import com.exercicio.cardsbattle.component.CardManager;
 import com.exercicio.cardsbattle.component.PlayerManager;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +14,7 @@ import lombok.Data;
  * Classe que representa o jogador.
  */
 @Data
-public class Player {
+public class Player implements Serializable {
 
     /* gerenciador de animações do jogador */
     private PlayerManager playerManager;
